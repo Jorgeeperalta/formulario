@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Plan de Estudios</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
@@ -31,6 +32,11 @@
 
         .input-group div {
             width: 100%;
+        }
+
+        #dialog {
+            border-radius: 10px;
+            padding: 10px;
         }
 
         h2 {
@@ -115,182 +121,254 @@
 </head>
 
 <body>
+    <button onclick="nuevoArancel()">Generar estructura arancelaria</button>
 
+    <table id="tabla-resultados">
+        <thead>
+            <tr>
+                <th>Sede</th>
+                <th>Plan de Estudios</th>
+                <th>Nombre Producto-Arancel</th>
+                <th>Código Softland</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
     <div class="container">
-        <h2>Formulario de estructura arancelaria</h2>
+        <div id="dialog" title="fdsfdsf">
+            <h2>Formulario de estructura arancelaria</h2>
 
-        <div class="input-group">
-            <select id="sede">
-                <option value="Sede">Sede</option>
-                <option value="MDA">MDA</option>
-                <option value="MDP">MDP</option>
-                <option value="DOL">DOL</option>
-                <option value="DIST">DIST</option>
-                <option value="CABA">CABA</option>
-            </select>
-
-            <select id="tipo-matricula">
-                <option value="Tipo de Matrícula">Tipo de Matrícula</option>
-                <option value="Anual">Anual</option>
-                <option value="Única vez">Única vez</option>
-                <option value="Sin Matrícula">Sin Matrícula</option>
-            </select>
-        </div>
-
-        <label class="label1">Plan de Estudios</label>
-        <div class="input-group">
-
-            <label>Seleccionar todos los planes<input type="checkbox" id="select-all" value="todos"></label>
-        </div>
-
-        <div class="input-group">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Seleccionar</th>
-                        <th>Plan de Estudios</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="plan-checkbox" value="Abogacía"></td>
-                        <td>Abogacía</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="plan-checkbox" value="Arquitectura"></td>
-                        <td>Arquitectura</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="plan-checkbox" value="Ing. en Informática"></td>
-                        <td>Ing. en Informática</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <label class="label1">Mensualidad</label>
-        <div class="checkbox-group">
-            <label><input type="checkbox" value="1er Cuatrimestre"> 1er Cuatrimestre</label>
             <div class="input-group">
-                <input type="number" id="cuotas" placeholder="Cantidad de cuotas" min="1" max="24">
-                <select id="inicio1">
-                    <option value="0">Mes de inicio</option>
-                    <option value="Enero">Enero</option>
-                    <option value="Febrero">Febrero</option>
-                    <option value="Marzo">Marzo</option>
-                    <option value="Abril">Abril</option>
-                </select>
-                <select id="cierre2">
-                    <option value="0">Mes de cierre</option>
-                    <option value="Enero">Enero</option>
-                    <option value="Febrero">Febrero</option>
-                    <option value="Marzo">Marzo</option>
-                    <option value="Abril">Abril</option>
-                    <option value="Mayo">Mayo</option>
-                    <option value="Junio">Junio</option>
-                    <option value="Julio">Julio</option>
-                    <option value="Agosto">Agosto</option>
+                <select id="sede">
+                    <option value="Sede">Sede</option>
+                    <option value="MDA">MDA</option>
+                    <option value="MDP">MDP</option>
+                    <option value="DOL">DOL</option>
+                    <option value="DIST">DIST</option>
+                    <option value="CABA">CABA</option>
                 </select>
 
+                <select id="tipo-matricula">
+                    <option value="Tipo de Matrícula">Tipo de Matrícula</option>
+                    <option value="Anual">Anual</option>
+                    <option value="Única vez">Única vez</option>
+                    <option value="Sin Matrícula">Sin Matrícula</option>
+                </select>
             </div>
 
-            <label><input type="checkbox" value="2do Cuatrimestre"> 2do Cuatrimestre</label>
+            <label class="label1">Plan de Estudios</label>
             <div class="input-group">
 
-                <input type="number" id="cuotas" placeholder="Cantidad de cuotas" min="1" max="24">
-                <select id="inicio2">
-                    <option value="0">Mes de inicio</option>
-                    <option value="Enero">Enero</option>
-                    <option value="Febrero">Febrero</option>
-                    <option value="Marzo">Marzo</option>
-                    <option value="Abril">Abril</option>
-                </select>
-                <select id="cierre2">
-                    <option value="0">Mes de cierre</option>
-                    <option value="Enero">Enero</option>
-                    <option value="Febrero">Febrero</option>
-                    <option value="Marzo">Marzo</option>
-                    <option value="Abril">Abril</option>
-                    <option value="Mayo">Mayo</option>
-                    <option value="Junio">Junio</option>
-                    <option value="Julio">Julio</option>
-                    <option value="Agosto">Agosto</option>
-                </select>
-
+                <label>Seleccionar todos los planes<input type="checkbox" id="select-all" value="todos"></label>
             </div>
-            <label><input type="checkbox" value="Única vez"> Única vez</label>
+
             <div class="input-group">
-
-                <input type="number" id="cuotas" placeholder="Cantidad de cuotas" min="1" max="24">
-                <select id="inicioUnica">
-                    <option value="0">Mes de inicio</option>
-                    <option value="Enero">Enero</option>
-                    <option value="Febrero">Febrero</option>
-                    <option value="Marzo">Marzo</option>
-                    <option value="Abril">Abril</option>
-                </select>
-                <select id="cierreUnica">
-                    <option value="0">Mes de cierre</option>
-                    <option value="Enero">Enero</option>
-                    <option value="Febrero">Febrero</option>
-                    <option value="Marzo">Marzo</option>
-                    <option value="Abril">Abril</option>
-                    <option value="Mayo">Mayo</option>
-                    <option value="Junio">Junio</option>
-                    <option value="Julio">Julio</option>
-                    <option value="Agosto">Agosto</option>
-                </select>
-
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Seleccionar</th>
+                            <th>Plan de Estudios</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="plan-checkbox" value="Abogacía"></td>
+                            <td>Abogacía</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="plan-checkbox" value="Arquitectura"></td>
+                            <td>Arquitectura</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="plan-checkbox" value="Ing. en Informática"></td>
+                            <td>Ing. en Informática</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+            <label class="label1">Mensualidad</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="1er Cuatrimestre"> 1er Cuatrimestre</label>
+                <div class="input-group">
+                    <input type="number" id="cuotas" placeholder="Cantidad de cuotas" min="1" max="24">
+                    <select id="inicio1">
+                        <option value="0">Mes de inicio</option>
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                    </select>
+                    <select id="cierre2">
+                        <option value="0">Mes de cierre</option>
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Mayo">Mayo</option>
+                        <option value="Junio">Junio</option>
+                        <option value="Julio">Julio</option>
+                        <option value="Agosto">Agosto</option>
+                    </select>
+
+                </div>
+
+                <label><input type="checkbox" value="2do Cuatrimestre"> 2do Cuatrimestre</label>
+                <div class="input-group">
+
+                    <input type="number" id="cuotas" placeholder="Cantidad de cuotas" min="1" max="24">
+                    <select id="inicio2">
+                        <option value="0">Mes de inicio</option>
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                    </select>
+                    <select id="cierre2">
+                        <option value="0">Mes de cierre</option>
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Mayo">Mayo</option>
+                        <option value="Junio">Junio</option>
+                        <option value="Julio">Julio</option>
+                        <option value="Agosto">Agosto</option>
+                    </select>
+
+                </div>
+                <label><input type="checkbox" value="Única vez"> Única vez</label>
+                <div class="input-group">
+
+                    <input type="number" id="cuotas" placeholder="Cantidad de cuotas" min="1" max="24">
+                    <select id="inicioUnica">
+                        <option value="0">Mes de inicio</option>
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                    </select>
+                    <select id="cierreUnica">
+                        <option value="0">Mes de cierre</option>
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Mayo">Mayo</option>
+                        <option value="Junio">Junio</option>
+                        <option value="Julio">Julio</option>
+                        <option value="Agosto">Agosto</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <label class="label1">Cuotas</label>
+
+
+            <label class="label1">Aranceles Disponibles</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="Arancel General"> Arancel General</label>
+                <label><input type="checkbox" value="Arancel Parcial"> Arancel Parcial</label>
+                <label><input type="checkbox" value="Mantenimiento de Matrícula"> Mantenimiento de Matrícula</label>
+                <label><input type="checkbox" value="Derecho Alumno Activo"> Derecho Alumno Activo</label>
+                <label><input type="checkbox" value="Mantenimiento de Matrícula"> Derecho de examen</label>
+                <label><input type="checkbox" value="Derecho Alumno Activo"> Tesorería</label>
+                <label><input type="checkbox" value="Derecho Alumno Activo"> Trámites</label>
+            </div>
+
+            <button id="submit">Guardar</button>
+
+
         </div>
 
-        <label class="label1">Cuotas</label>
 
 
-        <label class="label1">Aranceles Disponibles</label>
-        <div class="checkbox-group">
-            <label><input type="checkbox" value="Arancel General"> Arancel General</label>
-            <label><input type="checkbox" value="Arancel Parcial"> Arancel Parcial</label>
-            <label><input type="checkbox" value="Mantenimiento de Matrícula"> Mantenimiento de Matrícula</label>
-            <label><input type="checkbox" value="Derecho Alumno Activo"> Derecho Alumno Activo</label>
-            <label><input type="checkbox" value="Mantenimiento de Matrícula"> Derecho de examen</label>
-            <label><input type="checkbox" value="Derecho Alumno Activo"> Tesorería</label>
-            <label><input type="checkbox" value="Derecho Alumno Activo"> Trámites</label>
-        </div>
-
-        <button id="submit">Enviar</button>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script>
+
         $(document).ready(function () {
-            // Seleccionar todos los planes
-            $('#select-all').change(function () {
-                $('.plan-checkbox').prop('checked', this.checked);
-            });
+            function nuevoArancel() {
+                //$("#tablaPlanes").empty();
+                $('#dialog').dialog('open');
 
-            // Actualizar checkbox "Seleccionar todos" si se desmarca alguno
-            $('.plan-checkbox').change(function () {
-                if (!$(this).is(':checked')) {
-                    $('#select-all').prop('checked', false);
+            }
+
+            $('#dialog').dialog({
+                autoOpen: false,
+                width: 1200,
+                height: "auto",
+                modal: true,
+                close: function () {
+
                 }
-            });
-
-            $('#submit').click(function () {
-                const sede = $('#sede').val();
-                const tipoMatricula = $('#tipo-matricula').val();
-                const cuotas = $('#cuotas').val();
-                const inicio = $('#inicio').val();
-                const cierre = $('#cierre').val();
-
-                // Obtener planes seleccionados
-                const planesSeleccionados = [];
-                $('.plan-checkbox:checked').each(function () {
-                    planesSeleccionados.push($(this).val());
+      // Seleccionar todos los planes
+      $('#select-all').change(function () {
+                    $('.plan-checkbox').prop('checked', this.checked);
                 });
 
-                alert(`Sede: ${sede}\nTipo de Matrícula: ${tipoMatricula}\nPlanes Seleccionados: ${planesSeleccionados.join(', ')}`);
+                // Actualizar checkbox "Seleccionar todos" si se desmarca alguno
+                $('.plan-checkbox').change(function () {
+                    if (!$(this).is(':checked')) {
+                        $('#select-all').prop('checked', false);
+                    }
+                });
+
+                $('#submit').click(function () {
+                    const sede = $('#sede').val();
+                    const tipoMatricula = $('#tipo-matricula').val();
+                    const cuotas = $('#cuotas').val();
+                    const inicio = $('#inicio').val();
+                    const cierre = $('#cierre').val();
+
+                    // Obtener planes seleccionados
+                    const planesSeleccionados = [];
+                    $('.plan-checkbox:checked').each(function () {
+                        planesSeleccionados.push($(this).val());
+                    });
+
+                    alert(`Sede: ${sede}\nTipo de Matrícula: ${tipoMatricula}\nPlanes Seleccionados: ${planesSeleccionados.join(', ')}`);
+                });
+
+
+                $('#submit').click(function () {
+                    const sede = $('#sede').val();
+
+                    // Obtener planes seleccionados
+                    const planesSeleccionados = [];
+                    $('.plan-checkbox:checked').each(function () {
+                        planesSeleccionados.push($(this).val());
+                    });
+
+                    // Obtener aranceles seleccionados
+                    const arancelesSeleccionados = [];
+                    $('.arancel-checkbox:checked').each(function () {
+                        arancelesSeleccionados.push($(this).val());
+                    });
+
+                    const tbody = $('#tabla-resultados tbody');
+                    tbody.empty(); // Limpiar tabla antes de generar nuevos datos
+
+                    planesSeleccionados.forEach(plan => {
+                        arancelesSeleccionados.forEach(arancel => {
+                            const nombreProducto = `${arancel} ${plan} ${sede}`;
+                            const codigoSoftland = `${arancel.substring(0, 3)}.0000${plan.substring(0, 2).toUpperCase()}.${sede}.00`;
+
+                            tbody.append(`
+              <tr>
+                <td>${sede}</td>
+                <td>${plan}</td>
+                <td>${nombreProducto}</td>
+                <td>${codigoSoftland}</td>
+              </tr>
+            `);
+                        });
+                    });
+                    $('#dialog').dialog('close');
+                });
             });
-        });
     </script>
 
 </body>
